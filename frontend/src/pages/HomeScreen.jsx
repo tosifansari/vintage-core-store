@@ -9,7 +9,6 @@ const HomeScreen = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     
-    // Search & Filter Local States
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -17,7 +16,8 @@ const HomeScreen = () => {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const { data } = await axios.get('http://localhost:5000/api/products');
+                // 🚀 Changed to relative path for production compatibility
+                const { data } = await axios.get('/api/products');
                 setProducts(data);
                 setFilteredProducts(data);
                 setLoading(false);
@@ -28,11 +28,9 @@ const HomeScreen = () => {
         fetchProducts();
     }, []);
 
-    // Real-time Query Filter Processing Loop
     useEffect(() => {
         let result = products;
 
-        // 1. Text Search Filter
         if (searchTerm.trim() !== '') {
             result = result.filter(product => 
                 product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -40,7 +38,6 @@ const HomeScreen = () => {
             );
         }
 
-        // 2. Category Dropdown Filter
         if (selectedCategory !== 'All') {
             result = result.filter(product => product.category === selectedCategory);
         }
@@ -50,12 +47,10 @@ const HomeScreen = () => {
 
     if (loading) return <div className="text-center py-20 text-amber-500 font-mono tracking-wider animate-pulse">SOURCING VINTAGE VAULT MATRICES...</div>;
 
-    // Dynamically pull distinct categories for filter buttons
     const categories = ['All', ...new Set(products.map(p => p.category))];
 
     return (
         <div className="space-y-8">
-            {/* Hero Section Banner */}
             <div className="bg-neutral-900 border border-stone-800 rounded-2xl p-8 text-center relative overflow-hidden shadow-xl">
                 <div className="max-w-xl mx-auto space-y-3 relative z-10">
                     <span className="text-[10px] text-amber-500 font-mono uppercase tracking-widest">Curated Artifacts</span>
@@ -65,9 +60,7 @@ const HomeScreen = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/20 to-transparent pointer-events-none" />
             </div>
 
-            {/* 🚀 Dynamic Search and Filtering Control Toolbar */}
             <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center bg-neutral-900/40 border border-stone-800/80 p-4 rounded-xl shadow-md">
-                {/* Search Bar Input Element */}
                 <div className="relative flex-grow max-w-md">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-600" />
                     <input 
@@ -79,7 +72,6 @@ const HomeScreen = () => {
                     />
                 </div>
 
-                {/* Category Filter Pills Container */}
                 <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
                     <SlidersHorizontal className="w-3.5 h-3.5 text-stone-500 hidden sm:block" />
                     {categories.map((cat) => (
@@ -98,7 +90,6 @@ const HomeScreen = () => {
                 </div>
             </div>
 
-            {/* Catalog Grid View */}
             <div className="space-y-4">
                 <div className="flex justify-between items-center pb-2 border-b border-stone-800/60">
                     <h2 className="font-serif text-xl text-stone-200 tracking-wide">Latest Collections</h2>

@@ -15,7 +15,6 @@ const ProductScreen = () => {
     const [loading, setLoading] = useState(true);
     const [qty, setQty] = useState(1);
 
-    // Dynamic Local Mock Review State
     const [reviews, setReviews] = useState([]);
     const [rating, setRating] = useState(5);
     const [comment, setComment] = useState('');
@@ -25,10 +24,10 @@ const ProductScreen = () => {
         const fetchProduct = async () => {
             try {
                 setLoading(true);
-                const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+                // 🚀 Changed to relative path for production compatibility
+                const { data } = await axios.get(`/api/products/${id}`);
                 setProduct(data);
                 
-                // Load default dummy reviews initially matching product metadata
                 setReviews([
                     {
                         _id: 'rev_1',
@@ -51,7 +50,6 @@ const ProductScreen = () => {
         navigate('/cart');
     };
 
-    // Review Submit Handler Intercept
     const submitReviewHandler = (e) => {
         e.preventDefault();
         if (!comment.trim()) return;
@@ -75,19 +73,15 @@ const ProductScreen = () => {
 
     return (
         <div className="space-y-8">
-            {/* Back Navigation Button */}
             <Link to="/" className="inline-flex items-center gap-2 text-xs font-mono text-stone-500 hover:text-amber-500 uppercase tracking-wider transition-colors">
                 <ArrowLeft className="w-3.5 h-3.5" /> Back to Catalog
             </Link>
 
-            {/* Product Meta Core Layout Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Left Side: Product Image Display */}
                 <div className="bg-neutral-900 border border-amber-900/5 rounded-xl p-4 shadow-xl flex items-center justify-center">
                     <img src={product.image} alt={product.name} className="max-h-[450px] object-cover rounded-lg border border-stone-800 bg-neutral-950 w-full" />
                 </div>
 
-                {/* Right Side: Technical Manifest Details */}
                 <div className="flex flex-col justify-between space-y-6">
                     <div className="space-y-4">
                         <div className="space-y-1">
@@ -95,7 +89,6 @@ const ProductScreen = () => {
                             <h1 className="font-serif text-3xl text-stone-100 tracking-wide">{product.name}</h1>
                         </div>
 
-                        {/* Rating Flag Indicator */}
                         <div className="flex items-center gap-1.5 text-stone-400 text-xs font-mono">
                             <div className="flex text-amber-500">
                                 {[...Array(5)].map((_, i) => (
@@ -112,7 +105,6 @@ const ProductScreen = () => {
                         </div>
                     </div>
 
-                    {/* Stock Status Box */}
                     <div className="bg-neutral-900 border border-amber-900/10 rounded-xl p-5 shadow-lg space-y-4">
                         <div className="flex justify-between text-xs font-mono">
                             <span className="text-stone-500">Inventory Registry:</span>
@@ -147,9 +139,7 @@ const ProductScreen = () => {
                 </div>
             </div>
 
-            {/* 🚀 Dynamic Feedback Review Section Segment */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-stone-800/40">
-                {/* Display Lists Block */}
                 <div className="space-y-4">
                     <h2 className="font-serif text-lg text-stone-200 tracking-wide flex items-center gap-2">
                         <MessageSquare className="w-4 h-4 text-amber-500" /> Collector Manifest Reviews
@@ -177,7 +167,6 @@ const ProductScreen = () => {
                     )}
                 </div>
 
-                {/* Input Form Submission Block */}
                 <div className="bg-neutral-900 border border-amber-900/10 rounded-xl p-6 h-fit shadow-xl space-y-4">
                     <h3 className="font-serif text-sm text-stone-200 tracking-wide uppercase font-medium">Log Asset Experience</h3>
                     

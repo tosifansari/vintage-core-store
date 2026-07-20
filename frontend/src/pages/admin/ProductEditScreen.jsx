@@ -23,7 +23,8 @@ const ProductEditScreen = () => {
         const fetchProduct = async () => {
             try {
                 setLoading(true);
-                const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+                // 🚀 Changed to relative path for production compatibility
+                const { data } = await axios.get(`/api/products/${id}`);
                 setName(data.name);
                 setPrice(data.price);
                 setImage(data.image);
@@ -43,7 +44,8 @@ const ProductEditScreen = () => {
         e.preventDefault();
         try {
             setUpdateLoading(true);
-            await axios.put(`http://localhost:5000/api/products/${id}`, {
+            // 🚀 Changed to relative path for production compatibility
+            await axios.put(`/api/products/${id}`, {
                 name,
                 price,
                 image,
@@ -92,7 +94,7 @@ const ProductEditScreen = () => {
 
                 <div className="flex flex-col gap-1.5">
                     <label className="text-[10px] text-stone-400 uppercase tracking-wider">Brand Label</label>
-                    <input type="text" value={brand} onChange={(e) => setBrand(e.target.value)} className="bg-neutral-950 border border-stone-800 text-stone-200 rounded p-2.5 text-sm focus:outline-none focus:border-amber-600" />
+                    <input type="text" value={brand} onChange={(e) => setBrand(target.value)} className="bg-neutral-950 border border-stone-800 text-stone-200 rounded p-2.5 text-sm focus:outline-none focus:border-amber-600" />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
