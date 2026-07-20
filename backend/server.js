@@ -56,5 +56,5 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server executing in ${process.env.NODE_ENV || 'development'} matrix mode on port ${PORT}`.amber.bold);
+    console.log(`Server executing in ${process.env.NODE_ENV || 'development'} matrix mode on port ${PORT}`.yellow.bold);
 });
