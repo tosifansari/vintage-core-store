@@ -17,7 +17,7 @@ import ProfileScreen from './pages/ProfileScreen';
 
 // Admin Inventory Control Dashboard Panels
 import ProductListScreen from './pages/admin/ProductListScreen';
-import ProductEditScreen from './pages/admin/ProductEditScreen'; // 🚀 Imported new edit layout screen
+import ProductEditScreen from './pages/admin/ProductEditScreen';
 
 // Classy Vintage Footer
 const DummyFooter = () => (
@@ -36,7 +36,7 @@ const App = () => {
       <main className="flex-grow container mx-auto px-4 py-8 max-w-7xl">
         <Routes>
           {/* Public E-Commerce Portal Routes */}
-          <Route path="/" element={<HomeScreen />} index />
+          <Route path="/" element={<HomeScreen />} />
           <Route path="/product/:id" element={<ProductScreen />} />
           <Route path="/cart" element={<CartScreen />} />
           <Route path="/login" element={<LoginScreen />} />
