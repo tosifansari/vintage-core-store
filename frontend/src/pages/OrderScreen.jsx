@@ -13,7 +13,8 @@ const OrderScreen = () => {
         const fetchOrderDetails = async () => {
             try {
                 setLoading(true);
-                const { data } = await axios.get(`[https://vintage-core-store.onrender.com](https://vintage-core-store.onrender.com)/api/orders/${orderId}`);
+                // Fixed relative URL to use global axios baseURL
+                const { data } = await axios.get(`/api/orders/${orderId}`);
                 setOrder(data);
                 setLoading(false);
             } catch (err) {
@@ -30,7 +31,7 @@ const OrderScreen = () => {
     if (loading) return <div className="text-center py-20 text-amber-500 font-mono tracking-wider animate-pulse">RETRIEVING INVOICE MANIFEST...</div>;
     if (error) return <div className="text-center py-20 text-red-400 bg-red-950/20 border border-red-900 rounded p-4">{error}</div>;
     
-    // 🚀 SAFETY CHECK Matrix: Agar state abhi bhi empty hai toh crash hone se bachao
+    // SAFETY CHECK Matrix: Agar state abhi bhi empty hai toh crash hone se bachao
     if (!order) return <div className="text-center py-20 text-stone-500 font-mono">MANIFEST RETRIEVAL FAILED</div>;
 
     return (
@@ -112,7 +113,7 @@ const OrderScreen = () => {
                     </div>
 
                     <div className="flex justify-between items-center pt-3 border-t border-stone-800">
-                        <span className="text-base text-stone-300">Total Settlement:</span>
+                        <span>Total Settlement:</span>
                         <span className="text-2xl font-mono font-medium text-amber-500">${order.totalPrice?.toFixed(2)}</span>
                     </div>
                 </div>
@@ -121,4 +122,4 @@ const OrderScreen = () => {
     );
 };
 
-export default OrderScreen;``
+export default OrderScreen;
