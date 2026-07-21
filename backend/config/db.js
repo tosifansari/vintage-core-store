@@ -10,5 +10,4 @@ const connectDB = async () => {
   }
 };
 
-// Yeh default export hona zaroori hai:
-export default connectDB;
+export { connectDB };
