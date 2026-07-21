@@ -1,14 +1,14 @@
 // backend/routes/productRoutes.js
-// backend/routes/productRoutes.js
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { 
+
+import { 
     getProducts, 
     getProductById,
     createProduct,
     updateProduct,
     deleteProduct
-} = require('../controllers/productController');
+} from '../controllers/productController.js';
 
 // Standard endpoint configurations
 router.route('/')
@@ -20,4 +20,4 @@ router.route('/:id')
       .put(updateProduct)
       .delete(deleteProduct);
 
-module.exports = router;
+export default router;
