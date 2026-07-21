@@ -13,7 +13,7 @@ const ProductListScreen = () => {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const { data } = await axios.get('http://localhost:5000/api/products');
+                const { data } = await axios.get('[https://vintage-core-store.onrender.com](https://vintage-core-store.onrender.com)/api/products');
                 setProducts(data);
                 setLoading(false);
             } catch (err) {
@@ -25,7 +25,7 @@ const ProductListScreen = () => {
 
     const createProductHandler = async () => {
         try {
-            const { data } = await axios.post('http://localhost:5000/api/products');
+            const { data } = await axios.post('[https://vintage-core-store.onrender.com](https://vintage-core-store.onrender.com)/api/products');
             setProducts([...products, data]);
             setMessage('Asset Created Successfully');
             setTimeout(() => setMessage(''), 3000);
@@ -37,7 +37,7 @@ const ProductListScreen = () => {
     const deleteHandler = async (id) => {
         if (window.confirm('Are you sure you want to delete this asset?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/products/${id}`);
+                await axios.delete(`[https://vintage-core-store.onrender.com](https://vintage-core-store.onrender.com)/api/products/${id}`);
                 setProducts(products.filter((p) => p._id !== id));
                 setMessage('Asset Removed from Vault');
                 setTimeout(() => setMessage(''), 3000);

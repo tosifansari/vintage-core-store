@@ -37,7 +37,7 @@ const RegisterScreen = () => {
         try {
             setLoading(true);
             setError(null);
-            const { data } = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
+            const { data } = await axios.post('[https://vintage-core-store.onrender.com](https://vintage-core-store.onrender.com)/api/auth/register', { name, email, password });
             dispatch(setCredentials({ ...data }));
             navigate(redirect);
         } catch (err) {

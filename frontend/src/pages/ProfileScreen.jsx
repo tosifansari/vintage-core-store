@@ -29,7 +29,7 @@ const ProfileScreen = () => {
         const fetchMyOrders = async () => {
             try {
                 setLoadingOrders(true);
-                const { data } = await axios.get('http://localhost:5000/api/orders/myorders');
+                const { data } = await axios.get('[https://vintage-core-store.onrender.com](https://vintage-core-store.onrender.com)/api/orders/myorders');
                 setMyOrders(data);
                 setLoadingOrders(false);
             } catch (err) {
@@ -51,7 +51,7 @@ const ProfileScreen = () => {
             setMessage(null);
             setError(null);
             
-            const { data } = await axios.put('http://localhost:5000/api/auth/profile', {
+            const { data } = await axios.put('[https://vintage-core-store.onrender.com](https://vintage-core-store.onrender.com)/api/auth/profile', {
                 _id: userInfo ? userInfo._id : 'mock_user_101',
                 name,
                 email,

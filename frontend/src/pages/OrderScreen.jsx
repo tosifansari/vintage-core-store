@@ -13,7 +13,7 @@ const OrderScreen = () => {
         const fetchOrderDetails = async () => {
             try {
                 setLoading(true);
-                const { data } = await axios.get(`http://localhost:5000/api/orders/${orderId}`);
+                const { data } = await axios.get(`[https://vintage-core-store.onrender.com](https://vintage-core-store.onrender.com)/api/orders/${orderId}`);
                 setOrder(data);
                 setLoading(false);
             } catch (err) {
