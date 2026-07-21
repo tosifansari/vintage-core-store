@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
 import cors from 'cors';
-import connectDB from './config/db.js';
+import { connectDB } from './config/db.js';
 
 // Route Imports
 import productRoutes from './routes/productRoutes.js';

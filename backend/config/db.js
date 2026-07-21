@@ -1,14 +1,14 @@
-// config/db.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect(process.env.MONGO_URI);
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error(`Database Error: ${error.message}`);
-        process.exit(1); // Server crash code agar connection fail ho
-    }
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
+  } catch (error) {
+    console.error(`Error: ${error.message}`.red.bold);
+    process.exit(1);
+  }
 };
 
-module.exports = connectDB;
+// Yeh default export hona zaroori hai:
+export default connectDB;
