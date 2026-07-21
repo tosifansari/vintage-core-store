@@ -1,4 +1,3 @@
-// controllers/productController.js
 // backend/controllers/productController.js
 
 // Mock initial database state lookup array matrix
@@ -41,7 +40,7 @@ const productsData = [
     }
 ];
 
-const getProducts = async (req, res) => {
+export const getProducts = async (req, res) => {
     try {
         res.status(200).json(productsData);
     } catch (error) {
@@ -49,7 +48,7 @@ const getProducts = async (req, res) => {
     }
 };
 
-const getProductById = async (req, res) => {
+export const getProductById = async (req, res) => {
     try {
         const product = productsData.find((p) => p._id === req.params.id);
         if (product) {
@@ -62,7 +61,7 @@ const getProductById = async (req, res) => {
     }
 };
 
-const deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res) => {
     try {
         res.status(200).json({ message: 'Product vanished from manifest successfully' });
     } catch (error) {
@@ -70,7 +69,7 @@ const deleteProduct = async (req, res) => {
     }
 };
 
-const createProduct = async (req, res) => {
+export const createProduct = async (req, res) => {
     try {
         const sampleProduct = {
             _id: 'mock_product_' + Date.now(),
@@ -90,7 +89,7 @@ const createProduct = async (req, res) => {
     }
 };
 
-const updateProduct = async (req, res) => {
+export const updateProduct = async (req, res) => {
     try {
         const { name, price, description, image, brand, category, countInStock } = req.body;
         res.status(200).json({
@@ -106,12 +105,4 @@ const updateProduct = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-};
-
-module.exports = {
-    getProducts,
-    getProductById,
-    deleteProduct,
-    createProduct,
-    updateProduct
 };
