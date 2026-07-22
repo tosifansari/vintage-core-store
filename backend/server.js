@@ -1,31 +1,32 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import colors from 'colors';
 import cors from 'cors';
-import { connectDB } from './config/db.js';
-import productRoutes from './routes/productRoutes.js';
 
 dotenv.config();
-connectDB();
 
 const app = express();
 
-app.use(cors({
-  origin: '*',
-  credentials: true
-}));
-
+app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/products', productRoutes);
+// Auth Mock/Real Endpoints
+app.post('/api/auth/register', (req, res) => {
+  const { name, email } = req.body;
+  res.status(201).json({
+    _id: 'user_' + Date.now(),
+    name: name || 'Tosif Ansari',
+    email: email,
+    token: 'jwt_mock_token_12345',
+  });
+});
+
+app.get('/api/orders/myorders', (req, res) => {
+  res.json([]);
+});
 
 app.get('/', (req, res) => {
-  res.send('API is running successfully...');
+  res.send('Vintage Core Backend Running');
 });
 
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server executing on port ${PORT}`.yellow.bold);
-});
+app.listen(PORT, () => console.log(`Server on port ${PORT}`));
